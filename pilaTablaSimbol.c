@@ -44,7 +44,7 @@ symtab* getCima(symstack *ss){
 symtab* sacarSymTab(symstack *ss){
     symtab *ts_aux, *ts_next, *tt;
     tt = (symtab*)malloc(sizeof(symtab));
-    ts_aux = ts->root;
+    ts_aux = ss->root;
     while(ts_aux == NULL){
         ts_next = ts_aux->next;
         if(ts_next==NULL){
