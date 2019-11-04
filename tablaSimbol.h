@@ -32,7 +32,7 @@ symbol *root;
 int num;
 symtab *next;
 };
-
+symbol *crearSymbol();
 symtab *crearSymTab();
 void borrarSymTab(symtab *st);
 int insertar(symtab *st, symbol *sym);
