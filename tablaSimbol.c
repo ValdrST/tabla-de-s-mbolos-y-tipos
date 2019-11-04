@@ -138,7 +138,7 @@ listParam *getListParam(symtab *st, char *id){
         }
         s = s->next;
     }
-    return -1;
+    return NULL;
 }
 
 int getNumParam(symtab *st, char *id){

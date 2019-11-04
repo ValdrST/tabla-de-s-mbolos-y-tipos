@@ -24,10 +24,11 @@ type *next;
 };
 
 typedef struct _typetab typetab;
-struct typetab{
+struct _typetab{
 type *root;
 int num;
 };
+
 type *crearTipo();
 void borrarType(type *t);
 int insertarTipo(typetab *tt, type *t);

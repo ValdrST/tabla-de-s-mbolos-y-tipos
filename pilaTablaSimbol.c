@@ -6,11 +6,9 @@ symstack *crearSymStack(){
 }
 
 void borrarSymStack(){
-    return 0;
 }
 
 void insertarSymTab(symtab *sym){
-    return 0;
 }
 
 symtab* getCima(symstack *s){
