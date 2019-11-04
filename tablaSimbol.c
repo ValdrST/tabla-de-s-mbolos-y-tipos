@@ -8,8 +8,11 @@ param *crearParam(int tipo){
     return p;
 }
 
-void borraParam (param *p){
-    free(p);
+void borraParam(param *p){
+    while(p!=NULL){
+        borraParam(p->next);
+        free(p);
+    }
 }
 
 listParam *crearLP(){
@@ -20,18 +23,19 @@ listParam *crearLP(){
 void add(listParam lp, int tipo){
     param *p, *p_next;
     p = lp.root;
-    p_next = p->next;
     while(p != NULL){
+        p_next = p->next;
         if(p_next == NULL){
             p->next = crearParam(tipo);
         }
         p = p_next->next;
-        p_next = p->next;
+        
     }
     lp.num++;
 }
 
 void borrarListParam(listParam *lp){
+    borraParam(lp->root);
     free(lp);
 }
 
@@ -47,7 +51,10 @@ symbol *crearSymbol(){
 }
 
 void borrarSymbol(symbol *s){
-    free(s);
+    while(s!=NULL){
+        borrarSymbol(s->next);
+        free(s);
+    }
 }
 
 symtab *crearSymTab(){
@@ -59,22 +66,25 @@ symtab *crearSymTab(){
 }
 
 void borrarSymTab(symtab *st){
-    free(st);
+    while(st!=NULL){
+        borrarSymTab(st->next);
+        borrarSymbol(st->root);
+        free(st);
+    }
 }
 
 int insertar(symtab *st, symbol *sym){
     symbol *s, *s_next;
     s = st->root;
-    s_next = s->next;
     while(s != NULL){
+        s_next = s->next;
         if(s_next == NULL){
             s->next = sym;
             sym->next = NULL;
             st->num++;
             return st->num;
         }
-        s = s_next->next;
-        s_next = s->next;
+        s = s_next;
     }
     return -1;
 }

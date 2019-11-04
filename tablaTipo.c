@@ -6,22 +6,33 @@ type *crearTipo(){
     t->next = NULL;
     return t;
 }
+
+void borrarTypeTab(typetab *tt){
+    while(tt!=NULL){
+        borrarTypeTab(tt->next);
+        borrarType(tt->root);
+        free(tt);
+    }
+}
+
 void borrarType(type *t){
-    free(t);
+    while(t!=NULL){
+        borrarType(t->next);
+        free(t);
+    }
 }
 
 int insertarTipo(typetab *tt, type *t){
     type *t_aux, *t_next;
     t_aux = tt->root;
-    t_next = t_aux->next;
     while(t_aux != NULL){
+        t_next = t_aux->next;
         if(t_next == NULL){
             t_aux->next = t;
             tt->num++;
             return tt->num;
         }
-        t_aux = t_next->next;
-        t_next = t_aux->next;
+        t_aux = t_next;
     }
     return -1;
 }

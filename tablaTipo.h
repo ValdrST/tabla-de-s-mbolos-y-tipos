@@ -27,10 +27,12 @@ typedef struct _typetab typetab;
 struct _typetab{
 type *root;
 int num;
+typetab *next;
 };
 
 type *crearTipo();
 void borrarType(type *t);
+void borrarTypeTab(typetab *tt);
 int insertarTipo(typetab *tt, type *t);
 tipoBase getTipoBase(typetab *tt , int id);
 int getTam(typetab *tt, int id);

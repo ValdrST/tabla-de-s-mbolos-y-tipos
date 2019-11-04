@@ -8,7 +8,7 @@ int num;
 
 typestack *crearTypeStack();
 void borrarTypeStack(typestack *ts);
-void insertarTypeTab(typetab *sym);
+void insertarTypeTab(typestack *ts, typetab *sym);
 typetab* getCimaType(typestack *ts);
 typetab* sacarTypeTab(typestack *ts);
 #define PILATABLATIPO_H_INCLUDED
