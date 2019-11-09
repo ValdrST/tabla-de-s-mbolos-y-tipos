@@ -34,6 +34,8 @@ symtab *next;
 };
 symbol *crearSymbol();
 symtab *crearSymTab();
+char* getParams(param *p);
+void printTablaSimbolos(symtab *st);
 void borrarSymTab(symtab *st);
 int insertar(symtab *st, symbol *sym);
 int buscar(symtab *st, char *id);

@@ -4,7 +4,7 @@
 symstack *crearSymStack(){
     symstack *ss = malloc(sizeof(symstack));
     ss->num = 0;
-    ss->root=NULL;
+    ss->root=malloc(sizeof(symtab));
     return ss;
 }
 

@@ -8,6 +8,13 @@
 
 
 int main(int argc, char *argv[]){
-    printf("Estoy corriendo");
+    typestack *ptt = crearTypeStack();
+    symstack *pts = crearSymStack();
+    insertarTypeTab(ptt,crearTypeTab()); //Insertar tabla de tipos y crearla
+    
+    insertarSymTab(pts,crearSymTab());
+    // Imprimir las tablas
+    printTablaTipos(getCimaType(ptt));
+    printTablaSimbolos(getCima(pts));
     return 0;
 }

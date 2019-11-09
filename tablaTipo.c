@@ -1,8 +1,21 @@
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include "tablaTipo.h"
 
-type *crearTipo(){
+typetab *crearTypeTab(){
+    typetab *tt = malloc(sizeof(typetab));
+    tt->root = NULL;
+    tt->num = 0;
+    tt->next=NULL;
+}
+
+type *crearTipo(char* nombre,int tam, int numElem,tipoBase tb){
     type *t = (type*)malloc(sizeof(type));
+    strcpy(t->nombre,nombre);
+    t->tamBytes = tam;
+    t->numElem = numElem;
+    t->tb = tb;
     t->next = NULL;
     return t;
 }
@@ -85,4 +98,16 @@ char* getNombre(typetab *tt, int id){
         t = t->next;
     }
     return NULL;
+}
+
+void printTablaTipos(typetab *tt){
+    type *t_next;
+    if(tt->root != NULL)
+        do{
+            printf("id: %d nombre: %s numero elementos: %d tamaño: %d\n",tt->root->id,tt->root->nombre,tt->root->numElem,tt->root->tamBytes);
+            t_next = tt->root->next;
+        }while(t_next!=NULL);
+    else
+        printf("No hay tipos en la tabla\n");
+    
 }

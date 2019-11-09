@@ -30,8 +30,10 @@ int num;
 typetab *next;
 };
 
-type *crearTipo();
+typetab *crearTypeTab();
+type *crearTipo(char* nombre,int tam, int numElem,tipoBase tb);
 void borrarType(type *t);
+void printTablaTipos(typetab *tt);
 void borrarTypeTab(typetab *tt);
 int insertarTipo(typetab *tt, type *t);
 tipoBase getTipoBase(typetab *tt , int id);

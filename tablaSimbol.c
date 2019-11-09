@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "tablaSimbol.h"
@@ -161,4 +162,33 @@ int getNumParam(symtab *st, char *id){
         s = s->next;
     }
     return -1;
+}
+
+
+char* getParams(param *p){
+    param *p_next;
+    char* param_s = "";
+    do{
+        char* c = malloc(sizeof(char)*100);
+        strcat(param_s," ");
+        sprintf(c, "%d", p->tipo);
+        strcat(param_s,c);
+        p_next = p->next;
+    }while(p_next != NULL);
+    return param_s;
+}
+
+void printTablaSimbolos(symtab *st){
+    symbol *s_next;
+    if(st!=NULL)
+    do{
+        if(st->root != NULL){
+            printf("id: %d dir: %d tipo: $d tipoVar: %d params: %s\n",st->root->id,st->root->dir,st->root->tipo,st->root->tipoVar,getParams(st->root->params->root));
+            s_next = st->root->next;
+        }
+    }while(s_next != NULL);
+    else{
+        printf("No hay simbolos en la tabla\n");
+    }
+    
 }
