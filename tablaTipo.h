@@ -31,7 +31,7 @@ typetab *next;
 };
 
 typetab *crearTypeTab();
-type *crearTipo(char* nombre,int tam, int numElem,tipoBase tb);
+type *crearTipo(char* nombre,int tam, int numElem);
 void borrarType(type *t);
 void printTablaTipos(typetab *tt);
 void borrarTypeTab(typetab *tt);

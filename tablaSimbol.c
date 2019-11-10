@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include "tablaSimbol.h"
+
+// Se crea un parametro
 param *crearParam(int tipo){
     param *p = (param*)malloc(sizeof(param));
     p->tipo = tipo;
     p->next = NULL;
     return p;
 }
-
+// Se borra y libera la memoria elemento a elemento del parametro
 void borraParam(param *p){
     while(p!=NULL){
         borraParam(p->next);
@@ -16,11 +18,13 @@ void borraParam(param *p){
     }
 }
 
+// Se crea una lista de parametros
 listParam *crearLP(){
     listParam *lp = (listParam*)malloc(sizeof(listParam));
     return lp;
 }
 
+// Se añade un parametro a la lista de parametros
 void add(listParam lp, int tipo){
     param *p, *p_next;
     p = lp.root;
@@ -34,30 +38,31 @@ void add(listParam lp, int tipo){
     }
     lp.num++;
 }
-
+ 
+//Se borra  la lista de parametros y se libera la memoria
 void borrarListParam(listParam *lp){
     borraParam(lp->root);
     free(lp);
 }
-
+// se obtiene el numero de parametros de la lista
 int getNumListParam(listParam *lp){
     return lp->num;
 }
-
+// Se crea e inicializa un simbolo nuevo
 symbol *crearSymbol(){
     symbol *s = (symbol*)malloc(sizeof(symbol));
     s->next=NULL;
     s->params=NULL;
     return s;
 }
-
+// Se elimina y se libera la memoria del simbolo de forma recursiva
 void borrarSymbol(symbol *s){
     while(s!=NULL){
         borrarSymbol(s->next);
         free(s);
     }
 }
-
+// Crea e inicializa una tabla de simbolos
 symtab *crearSymTab(){
     symtab *st = (symtab*)malloc(sizeof(symtab));
     st->next=NULL;
@@ -65,7 +70,7 @@ symtab *crearSymTab(){
     st->root = NULL;
     return st;
 }
-
+// Borra la tabla de simbolos y libera meoria de forma recursiva
 void borrarSymTab(symtab *st){
     while(st!=NULL){
         borrarSymTab(st->next);
@@ -73,7 +78,7 @@ void borrarSymTab(symtab *st){
         free(st);
     }
 }
-
+// Inserta simbolo en tabla de simbolos
 int insertar(symtab *st, symbol *sym){
     symbol *s, *s_next;
     s = st->root;
@@ -89,7 +94,7 @@ int insertar(symtab *st, symbol *sym){
     }
     return -1;
 }
-
+// Retorna el id si es que existe de la tabla de simbolos si no retorna -1
 int buscar(symtab *st, char *id){
     symbol *s;
     s = st->root;
@@ -103,7 +108,7 @@ int buscar(symtab *st, char *id){
     }
     return -1;
 }
-
+// obtiene el tipo de un id en la tabla si no existe retorna -1
 int getTipo(symtab *st, char *id){
     symbol *s;
     s = st->root;
@@ -115,7 +120,7 @@ int getTipo(symtab *st, char *id){
     }
     return -1;
 }
-
+// Obtiene el tipo var de la tabla de simbolos si no existe retorna -1
 int getTipoVar(symtab *st, char *id){
     symbol *s;
     s = st->root;
@@ -127,7 +132,7 @@ int getTipoVar(symtab *st, char *id){
     }
     return -1;
 }
-
+// Obtiene la direccion de una tabla de simbolos si no existe retorna -1
 int getDir(symtab *st, char *id){
     symbol *s;
     s = st->root;
@@ -139,7 +144,7 @@ int getDir(symtab *st, char *id){
     }
     return -1;
 }
-
+// Obtiene la lista de parametros de una tabla de simbolos si no existe retorna NULL
 listParam *getListParam(symtab *st, char *id){
     symbol *s;
     s = st->root;
@@ -164,7 +169,7 @@ int getNumParam(symtab *st, char *id){
     return -1;
 }
 
-
+// Retorna una cadena con los parametros 
 char* getParams(param *p){
     param *p_next;
     char* param_s = "";
@@ -177,13 +182,15 @@ char* getParams(param *p){
     }while(p_next != NULL);
     return param_s;
 }
-
+// Imprime la tabla de simbolos
 void printTablaSimbolos(symtab *st){
     symbol *s_next;
+    char * id;
     if(st!=NULL)
     do{
         if(st->root != NULL){
-            printf("id: %d dir: %d tipo: $d tipoVar: %d params: %s\n",st->root->id,st->root->dir,st->root->tipo,st->root->tipoVar,getParams(st->root->params->root));
+            id = st->root->id;
+            printf("id: %d dir: %d tipo: $d tipoVar: %d params: %s\n",st->root->id,getDir(st,id),getTipo(st,id),getTipoVar(st,id),getParams(st->root->params->root));
             s_next = st->root->next;
         }
     }while(s_next != NULL);
