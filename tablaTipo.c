@@ -11,9 +11,10 @@ typetab *crearTypeTab(){
     return tt;
 }
 // Crea un tipo de acuerdo a los parametros dados
-type *crearTipo(char* nombre,int tam, int numElem){
+type *crearTipo(int id,char* nombre,int tam, int numElem){
     type *t = (type*)malloc(sizeof(type));
     strcpy(t->nombre,nombre);
+    t->id = id;
     t->tamBytes = tam;
     t->numElem = numElem;
     t->next = NULL;
@@ -38,15 +39,16 @@ void borrarType(type *t){
 int insertarTipo(typetab *tt, type *t){
     type *t_aux, *t_next;
     t_aux = tt->root;
-    while(t_aux != NULL){
-        t_next = t_aux->next;
-        if(t_next == NULL){
-            t_aux->next = t;
+    do{
+        if(t_aux == NULL){
+            t_aux = t;
             tt->num++;
             return tt->num;
         }
-        t_aux = t_next;
-    }
+        t_aux = t_aux->next;
+        t_next = t_aux->next;
+        
+    }while(t_aux != NULL);
     return -1;
 }
 // Obtiene el tipo base de un id
